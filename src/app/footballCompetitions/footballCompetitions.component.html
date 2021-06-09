@@ -1,13 +1,13 @@
 <div class="layout-column align-items-center mt-50">
   <section class="layout-row align-items-center justify-content-center" data-test-id="page-number-buttons">
-    <button>
-
+    <button *ngFor="let n of [1,2,3,4]" (click)="changeList(n)" class="btn btn-">
+      {{n}}
     </button>
   </section>
 
   <ul class="mt-50 styled" data-test-id="football-competitions">
-    <li class="slide-up-fade-in py-10" >
-
+    <li class="slide-up-fade-in py-10" *ngFor="let comp of listCompetitions">
+      Competition {{comp.name}} won by {{comp.winner}} in year {{comp.year}}
     </li>
   </ul>
 </div>

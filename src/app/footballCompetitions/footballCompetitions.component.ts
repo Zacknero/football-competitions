@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {tap} from "rxjs/operators";
+import {Component} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 interface Competition {
   name: string;
@@ -23,13 +22,16 @@ interface ApiResponse {
   templateUrl: './footballCompetitions.component.html',
   styleUrls: ['./footballCompetitions.component.scss']
 })
-export class FootballCompetitions implements OnInit {
+export class FootballCompetitions {
+  
+  listCompetitions: Array<Competition> = [];
 
   constructor(private http: HttpClient) {
   }
-
-  ngOnInit() {
-
+  
+  changeList(n: number) {
+    this.http.get<ApiResponse>(`https://jsonmock.hackerrank.com/api/football_competitions?page=${n}`).subscribe(
+      list => this.listCompetitions = list.data
+    )
   }
-
 }
