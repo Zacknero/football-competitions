@@ -1,6 +1,6 @@
 <div class="layout-column align-items-center mt-50">
   <section class="layout-row align-items-center justify-content-center" data-test-id="page-number-buttons">
-    <button *ngFor="let n of [1,2,3,4]" (click)="changeList(n)" class="btn btn-">
+    <button *ngFor="let n of numberBtn" (click)="changeList(n)" class="btn btn-">
       {{n}}
     </button>
   </section>

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 interface Competition {
@@ -22,16 +22,26 @@ interface ApiResponse {
   templateUrl: './footballCompetitions.component.html',
   styleUrls: ['./footballCompetitions.component.scss']
 })
-export class FootballCompetitions {
+export class FootballCompetitions implements OnInit {
   
   listCompetitions: Array<Competition> = [];
-
+  numberBtn = [];
+  
   constructor(private http: HttpClient) {
+  }
+  
+  ngOnInit(): void {
+    this.changeList(1);
   }
   
   changeList(n: number) {
     this.http.get<ApiResponse>(`https://jsonmock.hackerrank.com/api/football_competitions?page=${n}`).subscribe(
-      list => this.listCompetitions = list.data
-    )
+      comp => {
+        this.numberBtn = [...Array(comp.total_pages + 1).keys()];
+        this.numberBtn.shift();
+        this.listCompetitions = comp.data;
+      }
+    );
   }
+  
 }
